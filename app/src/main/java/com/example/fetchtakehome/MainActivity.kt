@@ -3,6 +3,7 @@ package com.example.fetchtakehome
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import com.example.fetchtakehome.databinding.ActivityMainBinding
 import com.squareup.moshi.Moshi
@@ -20,15 +21,11 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
         val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
-
         val retrofit: Retrofit = Retrofit.Builder()
             .baseUrl("https://fetch-hiring.s3.amazonaws.com/")
             .addConverterFactory(MoshiConverterFactory.create(moshi))
             .build()
-
-
         val listApi: ListAPI = retrofit.create<ListAPI>(ListAPI::class.java)
         fetchData(listApi)
     }
@@ -37,13 +34,14 @@ class MainActivity : AppCompatActivity() {
         lifecycleScope.launch {
             try {
                 val response = api.fetchItems()
-                if (response.isNotEmpty()) {
+                if (response.isEmpty()) {
+                   Toast.makeText(this@MainActivity, "No items found!", Toast.LENGTH_SHORT).show()
+                } else {
                     Log.d(TAG, "First item in list: ${response[0]}")
                 }
-
-
             }
             catch (ex: Exception) {
+                Toast.makeText(this@MainActivity, "Error in request!", Toast.LENGTH_SHORT).show()
                 Log.e(TAG, "Failed to fetch: ${ex.message}", ex)
             }
         }
