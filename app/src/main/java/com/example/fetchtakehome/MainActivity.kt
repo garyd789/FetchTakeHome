@@ -51,9 +51,9 @@ class MainActivity : AppCompatActivity() {
                    Toast.makeText(this@MainActivity, "No items found!", Toast.LENGTH_SHORT).show()
                 } else {
                     Log.d(TAG, "First item in list: ${response[0]}")
-
-                    // Set adapter to the retrieved data and update recyclerView
-                    adapter = ItemAdapter(response)
+                    val sortedData = processItems(response)
+                    // Set adapter to the sorted data and update recyclerView
+                    adapter = ItemAdapter(sortedData)
                     binding.recyclerView.adapter = adapter
                 }
             }

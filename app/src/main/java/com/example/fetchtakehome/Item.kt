@@ -13,3 +13,13 @@ data class Item(
     val name: String?,
 )
 
+fun processItems(items: List<Item>): List<Item> {
+    return items
+        .filterNot { it.name.isNullOrBlank() } // Filter out items with null or blank names
+        .groupBy { it.listId } // Group items by listId
+        .toSortedMap() // Ensure the map is sorted using listId as key
+        .mapValues { entry ->
+            entry.value.sortedBy { it.name } // Sort items within each listId group by name
+        }
+        .flatMap { it.value } // Flatten the SortedMap back into a list
+}
