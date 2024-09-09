@@ -27,6 +27,8 @@ class ItemAdapter(private var items: List<Item>) : RecyclerView.Adapter<ItemAdap
 
     class ItemViewHolder(val binding: ItemLayoutBinding) : RecyclerView.ViewHolder(binding.root)
 
+
+    // Function used to filter list based on search results
     override fun getFilter(): Filter {
         return object : Filter() {
             override fun performFiltering(constraint: CharSequence?): FilterResults {

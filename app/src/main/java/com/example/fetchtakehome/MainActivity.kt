@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
 
 
 
-
+        // Set up Moshi and Retrofit
         val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
         val retrofit: Retrofit = Retrofit.Builder()
             .baseUrl("https://fetch-hiring.s3.amazonaws.com/")
