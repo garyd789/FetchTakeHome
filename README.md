@@ -1,4 +1,4 @@
-# Fetch Take Home
+# Fetch Rewards Coding Exercise
 
 A native Android app in Kotlin or Java that retrieves the data from https://fetch-hiring.s3.amazonaws.com/hiring.json.
 
