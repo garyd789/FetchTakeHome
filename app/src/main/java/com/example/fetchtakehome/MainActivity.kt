@@ -3,8 +3,11 @@ package com.example.fetchtakehome
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
 import android.widget.Toast
+import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fetchtakehome.databinding.ActivityMainBinding
 import com.squareup.moshi.Moshi
@@ -12,6 +15,7 @@ import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import kotlinx.coroutines.launch
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
+
 
 private const val TAG = "MainActivity"
 private lateinit var adapter: ItemAdapter
@@ -28,6 +32,12 @@ class MainActivity : AppCompatActivity() {
         adapter = ItemAdapter(emptyList())
         binding.recyclerView.adapter = adapter
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
+        binding.recyclerView.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
+
+        // Set up toolbar
+        setSupportActionBar(binding.toolbar)
+        supportActionBar?.title = "Fetch Rewards Coding Exercise"
+
 
 
 
@@ -39,8 +49,24 @@ class MainActivity : AppCompatActivity() {
         val listApi: ListAPI = retrofit.create<ListAPI>(ListAPI::class.java)
         fetchData(listApi)
 
+    }
 
 
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.search_menu, menu)
+        val searchItem = menu.findItem(R.id.actionSearch)
+        val searchView = searchItem.actionView as SearchView
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                adapter.filter.filter(newText)
+                return true
+            }
+        })
+        return true
     }
     // Function used to fetch data from URL
     private fun fetchData(api: ListAPI) {
@@ -64,5 +90,7 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
+
+
 
 }

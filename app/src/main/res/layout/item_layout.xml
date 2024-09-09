@@ -3,6 +3,10 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
+    android:layout_marginVertical="2dp"
+    android:paddingVertical="10dp"
+    android:paddingStart="2dp"
+    android:paddingEnd="0dp"
     >
 
     <TextView
@@ -10,14 +14,16 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:textSize="24sp"
-        android:lineSpacingExtra="24sp"/>
+        android:textSize="20sp"
+        android:lineSpacingExtra="24sp"
+        android:paddingHorizontal="8dp"/>
 
     <TextView
         android:id="@+id/name_text_view"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:textSize="24sp"
+        android:layout_weight="2.5"
+        android:textSize="20sp"
+        android:paddingHorizontal="8dp"
         android:lineSpacingExtra="24sp"/>
 </LinearLayout>

@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Fetch Take Home</string>
     <string name="title">Fetch Rewards Coding Exercise</string>
-    <string name="label_listID">ListID</string>
-    <string name="label_name">Name</string>
+    <string name="label_listID"><u>ListID</u></string>
+    <string name="label_name"><u>Name</u></string>
+    <string name="search_placeholder">Enter search…</string>
 </resources>
